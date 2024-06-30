@@ -1,0 +1,131 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Contact {
+public:
+    string contactName;
+    string contactPhone;
+    string contactEmail;
+
+    Contact(string name, string phone, string email) 
+        : contactName(name), contactPhone(phone), contactEmail(email) {}
+};
+
+class ContactList {
+private:
+    vector<Contact> contacts;
+
+public:
+    void addContact(const Contact& newContact) 
+	{
+        contacts.push_back(newContact);
+        cout << "Contact '" << newContact.contactName << "' added successfully." << endl;
+    }
+
+    void editContact(const string& name) 
+	{
+        for (auto& contact : contacts) 
+		{
+            if (contact.contactName == name) 
+			{
+                cout << "Editing contact: " << name << endl;
+                cout << "Enter new phone number: ";
+                cin >> contact.contactPhone;
+                cout << "Enter new email address: ";
+                cin >> contact.contactEmail;
+                cout << "Contact '" << name << "' updated successfully." << endl;
+                return;
+            }
+        }
+        cout << "Contact '" << name << "' not found." << endl;
+    }
+
+    void deleteContact(const string& name) 
+	{
+        for (auto it = contacts.begin(); it != contacts.end(); ++it) 
+		{
+            if (it->contactName == name) 
+			{
+                contacts.erase(it);
+                cout << "Contact '" << name << "' deleted successfully." << endl;
+                return;
+            }
+        }
+        cout << "Contact '" << name << "' not found." << endl;
+    }
+
+    void displayContacts() const 
+	{
+        if (contacts.empty()) 
+		{
+            cout << "No contacts available." << endl;
+            return;
+        }
+        
+        cout << "Contact List:" << endl;
+        for (const auto& contact : contacts) 
+		{
+            cout << "Name: " << contact.contactName 
+                 << ", Phone: " << contact.contactPhone 
+                 << ", Email: " << contact.contactEmail << endl;
+        }
+    }
+};
+
+int main() {
+    ContactList contactList;
+    int userChoice;
+    string name, phone, email;
+
+    do {
+        cout << "\nContact List Application" << endl;
+        cout << "1. Add Contact" << endl;
+        cout << "2. Edit Contact" << endl;
+        cout << "3. Delete Contact" << endl;
+        cout << "4. Display Contacts" << endl;
+        cout << "5. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> userChoice;
+
+        switch (userChoice) {
+            case 1:
+                cout << "Enter contact name: ";
+                cin >> name;
+                cout << "Enter contact phone number: ";
+                cin >> phone;
+                cout << "Enter contact email address: ";
+                cin >> email;
+                contactList.addContact(Contact(name, phone, email));
+                break;
+
+            case 2:
+                cout << "Enter the name of the contact to edit: ";
+                cin >> name;
+                contactList.editContact(name);
+                break;
+
+            case 3:
+                cout << "Enter the name of the contact to delete: ";
+                cin >> name;
+                contactList.deleteContact(name);
+                break;
+
+            case 4:
+                contactList.displayContacts();
+                break;
+
+            case 5:
+                cout << "Exiting the application. Goodbye!" << endl;
+                break;
+
+            default:
+                cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
+                break;
+        }
+    } while (userChoice != 5);
+
+    return 0;
+}
