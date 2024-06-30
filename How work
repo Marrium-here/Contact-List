@@ -1,0 +1,24 @@
+#include <iostream>: Includes the input-output stream library which is used for input and output operations (e.g., cout, cin).
+#include <vector>: Includes the vector library which provides the std::vector container.
+#include <string>: Includes the string library which provides the std::string class.
+using namespace std;: This statement allows us to use names from the standard library without the std:: prefix.
+
+The Contact class represents a single contact with a name, phone number, and email address.
+The class has three public member variables: contactName, contactPhone, and contactEmail.
+The constructor initializes these variables using an initializer list.
+
+The ContactList class manages a list of Contact objects.
+It has a private member variable contacts, which is a vector of Contact objects.
+
+Adds a new contact to the list and confirms the addition with a message.
+
+Edits an existing contact by finding it by name and updating its phone number and email address. If the contact is not found, it prints an appropriate message.
+
+Deletes a contact by finding it by name and removing it from the list. If the contact is not found, it prints an appropriate message.
+
+Displays all the contacts in the list. If there are no contacts, it prints a message indicating that the list is empty.
+
+The main function presents a menu-driven interface to the user.
+The user can choose to add, edit, delete, or display contacts, or exit the application.
+The application runs in a loop until the user chooses to exit by selecting option 5.
+Each case in the switch statement calls the appropriate function from the ContactList class to perform the desired operation.
